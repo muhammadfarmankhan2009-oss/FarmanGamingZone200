@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Farman Gaming Zone – Games, Mods &amp; Videos</title>
+<meta name="description" content="Original games, free indie games, mods, patches, guides and YouTube videos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens ===== */
+:root{
+  --bg:#0c1020; --card:#141a30; --cyan:#00e5ff; --purple:#8b5cf6; --text:#e8ecff; --muted:#8f98c0;
+  --line:rgba(255,255,255,.09); --r:14px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:radial-gradient(900px 500px at 85% -5%,rgba(139,92,246,.22),transparent 60%),radial-gradient(800px 500px at 0% 40%,rgba(0,229,255,.12),transparent 60%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/40px 40px,var(--bg);background-attachment:fixed;color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:Orbitron,sans-serif}
+h2{font-size:clamp(1.3rem,3vw,1.8rem);margin-bottom:18px}
+h3{margin:22px 0 10px;font-size:1.05rem}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 20px}
+.muted{color:var(--muted)} .center{text-align:center;padding:0 0 22px} .narrow{max-width:680px}
+.row{display:flex;gap:12px;flex-wrap:wrap} .between{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+
+/* ===== Buttons & inputs ===== */
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;color:#04121a;font:600 .92rem Inter;padding:10px 18px;border-radius:10px;background:linear-gradient(90deg,var(--cyan),#5bf0ff);transition:box-shadow .2s,transform .2s}
+.btn:hover{box-shadow:0 0 22px rgba(0,229,255,.45);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,.25)}
+.btn.sm{padding:6px 12px;font-size:.82rem} .btn.danger{background:#ff4d6d;color:#fff}
+input,select,textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit}
+select option{background:var(--card)}
+
+/* ===== Navbar ===== */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:20px;padding:12px 20px;background:rgba(12,16,32,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;color:var(--cyan);letter-spacing:.5px}
+.nav nav{display:flex;gap:18px;flex:1;font-size:.92rem;color:var(--muted)}
+.nav nav a:hover{color:var(--text)}
+.nav-tools{display:flex;gap:10px;align-items:center}
+.nav-tools input{width:190px}
+#savedCount{background:var(--purple);border-radius:99px;padding:0 8px;font-size:.78rem}
+.burger{display:none;background:none;border:0;color:var(--text);font-size:1.4rem;margin-left:auto}
+
+/* ===== Hero ===== */
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:60px 20px;
+  background:linear-gradient(120deg,#0c1020,#1a1050,#06303d,#0c1020);background-size:300% 300%;animation:flow 14s ease infinite}
+.hero-inner{max-width:760px}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);line-height:1.1;margin-bottom:16px;text-shadow:0 0 30px rgba(0,229,255,.35)}
+.hero p{color:#c3cbf0;margin-bottom:26px} .hero .row{justify-content:center}
+@keyframes flow{50%{background-position:100% 50%}}
+
+/* ===== Cards & grids ===== */
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.cats button,.catlink{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;color:var(--text);font:inherit;cursor:pointer;background:rgba(20,26,48,.7);border:1px solid var(--line);border-radius:var(--r);padding:20px;transition:.25s}
+.cats i{font-style:normal;font-size:1.6rem} .cats span{color:var(--muted);font-size:.85rem}
+.cats button:hover,.catlink:hover{border-color:var(--cyan);box-shadow:0 0 24px rgba(0,229,255,.18)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.grid.vids{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.card{background:rgba(20,26,48,.75);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.25s}
+.game:hover{border-color:var(--purple);box-shadow:0 0 28px rgba(139,92,246,.3);transform:translateY(-3px)}
+.cover{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--purple),#06303d)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .ph{position:absolute;inset:0;display:grid;place-items:center;font:800 2.4rem Orbitron;opacity:.5}
+.tag{position:absolute;left:10px;top:10px;background:rgba(12,16,32,.8);border:1px solid var(--line);padding:2px 10px;border-radius:99px;font-size:.75rem}
+.fav{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;background:rgba(12,16,32,.8);color:var(--text);font-size:1rem}
+.fav.on{color:#ff4d6d}
+.body{padding:14px 16px 16px} .body h3{margin:0 0 4px;font-size:1rem}
+.meta{display:flex;gap:12px;color:var(--muted);font-size:.82rem;margin-bottom:12px}
+.guide{padding:20px} .guide h3{margin-top:0} .guide ol{padding-left:20px;color:var(--muted);font-size:.9rem}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.video h3{padding:12px 16px;margin:0;font-size:.95rem}
+
+/* ===== Filters ===== */
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;margin-bottom:10px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px;border:1px dashed var(--line);border-radius:var(--r)}
+
+/* ===== Skeleton ===== */
+.skel{height:290px;border-radius:var(--r);background:linear-gradient(90deg,#141a30 25%,#1d2542 50%,#141a30 75%);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* ===== Modal & toast ===== */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(5,8,18,.8);display:grid;place-items:center;padding:20px}
+.box{position:relative;max-width:520px;width:100%;max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.x{position:absolute;right:14px;top:12px;background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer}
+.count{font:800 3rem Orbitron;color:var(--cyan);text-align:center;margin:14px 0}
+.toasts{position:fixed;right:18px;bottom:18px;z-index:200;display:grid;gap:8px}
+.toast{background:var(--card);border:1px solid var(--cyan);padding:10px 16px;border-radius:10px;animation:pop .25s}
+@keyframes pop{from{transform:translateY(10px);opacity:0}}
+
+/* ===== Admin ===== */
+.admin{background:#0a0e1c;min-height:100vh;position:relative;z-index:10}
+.adm-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form{padding:20px;display:grid;gap:12px;align-content:start}
+.form h3{margin:0} .form label{display:grid;gap:4px;font-size:.85rem;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.list{display:grid;gap:8px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+
+/* ===== Background name watermark: Mohammad Farman ===== */
+body::before{content:"MOHAMMAD FARMAN";position:fixed;inset:0;z-index:-1;display:grid;place-items:center;font:800 clamp(2.2rem,10vw,9rem) Orbitron,sans-serif;letter-spacing:.06em;white-space:nowrap;color:rgba(255,255,255,.035);transform:rotate(-12deg);pointer-events:none}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"MOHAMMAD FARMAN";position:absolute;inset:0;display:grid;place-items:center;font:800 clamp(2.2rem,10vw,8rem) Orbitron,sans-serif;letter-spacing:.06em;white-space:nowrap;color:rgba(255,255,255,.06);transform:rotate(-8deg);pointer-events:none}
+.hero-inner{position:relative}
+
+/* ===== Admin tabs (each tab shows only its own tools) ===== */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 20px}
+.tabs button{background:transparent;color:var(--muted);border:1px solid var(--line);padding:8px 16px;border-radius:10px;cursor:pointer;font:inherit}
+.tabs button.on{color:#04121a;background:var(--cyan);border-color:var(--cyan)}
+#admin .adm-cols{grid-template-columns:1fr;max-width:640px}
+#admin #gameForm,#admin #videoForm,#pGames,#pVids{display:none}
+#admin[data-tab=upload] #gameForm,#admin[data-tab=link] #gameForm,#admin.editing #gameForm,#admin[data-tab=video] #videoForm{display:grid}
+#admin[data-tab=edit] #pGames,#admin[data-tab=video] #pVids{display:block}
+#admin[data-tab=upload] .lk{display:none}
+#admin[data-tab=link] .up{display:none}
+
+/* ===== v2: full-screen name, zoom + moving lights, bigger buttons ===== */
+body::before{font-size:clamp(1.5rem,6.4vw,6.5rem);transform:none;color:rgba(255,255,255,.06);letter-spacing:.04em}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='230' height='90'%3E%3Ctext x='12' y='52' font-family='Arial' font-weight='800' font-size='15' fill='white' fill-opacity='.14' transform='rotate(-12 115 45)'%3EMOHAMMAD FARMAN%3C/text%3E%3C/svg%3E")}
+.hero::before{font-size:clamp(1.5rem,6.4vw,6.5rem);transform:none;color:rgba(255,255,255,.11);letter-spacing:.04em;place-items:end center;padding-bottom:3vh}
+.btn,.cats button,.catlink,.card,.nav nav a,.tabs button,.fav{transition:transform .25s ease,box-shadow .25s,border-color .25s,color .25s}
+.nav nav a{display:inline-block}
+.btn{font-size:1rem;padding:12px 24px;border-radius:12px;letter-spacing:.2px}
+.btn.sm{font-size:.9rem;padding:9px 16px}
+.card:hover,.cats button:hover,.catlink:hover,.btn:hover{box-shadow:0 0 32px hsla(var(--lh,190),100%,60%,.5);border-color:hsl(var(--lh,190),100%,65%)}
+@media(hover:hover){
+  .btn:hover,.tabs button:hover,.fav:hover{transform:scale(1.1)}
+  .cats button:hover,.catlink:hover{transform:scale(1.06)}
+  .card:hover{transform:scale(1.04);position:relative;z-index:2}
+  .nav nav a:hover{transform:scale(1.15);color:var(--cyan)}
+}
+#glow{position:fixed;left:0;top:0;width:460px;height:460px;margin:-230px 0 0 -230px;border-radius:50%;pointer-events:none;z-index:60;background:radial-gradient(circle,hsla(var(--gh,190),100%,60%,.2),transparent 65%);mix-blend-mode:screen;transform:translate(-999px,-999px)}
+
+/* ===== v3: smaller light, bigger zoom, small name tiles, colour themes ===== */
+#glow{width:210px;height:210px;margin:-105px 0 0 -105px}
+@media(hover:hover){
+  .btn:hover,.tabs button:hover,.fav:hover{transform:scale(1.22)}
+  .cats button:hover,.catlink:hover{transform:scale(1.14)}
+  .card:hover{transform:scale(1.09)}
+  .nav nav a:hover{transform:scale(1.28)}
+}
+.btn{background:linear-gradient(90deg,var(--cyan),var(--cyan2,#5bf0ff))}
+.hero{background:linear-gradient(120deg,#0c1020,var(--h1,#1a1050),var(--h2,#06303d),#0c1020);background-size:300% 300%}
+body{background:radial-gradient(900px 500px at 85% -5%,hsla(var(--th2,262),90%,60%,.22),transparent 60%),radial-gradient(800px 500px at 0% 40%,hsla(var(--th,190),100%,50%,.12),transparent 60%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/40px 40px,var(--bg);background-attachment:fixed}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='230' height='90'%3E%3Ctext x='12' y='52' font-family='Arial' font-weight='800' font-size='15' fill='white' fill-opacity='.12' transform='rotate(-12 115 45)'%3EMOHAMMAD FARMAN%3C/text%3E%3C/svg%3E")}
+.hero-inner{z-index:1}
+.nav-tools{position:relative}
+.themes{position:absolute;right:0;top:130%;z-index:70;display:grid;grid-template-columns:repeat(4,38px);gap:10px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.themes b{grid-column:1/-1;font-size:.85rem;color:var(--muted)}
+.themes button{width:38px;height:38px;border-radius:50%;border:2px solid transparent;cursor:pointer;background:var(--sw);transition:transform .2s}
+.themes button:hover{transform:scale(1.2)}
+.themes button.on{border-color:#fff}
+
+.me{display:block;margin:0 auto 18px;width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:center 25%;border:3px solid var(--cyan);box-shadow:0 0 34px hsla(var(--th,190),100%,60%,.6);transition:transform .25s}
+@media(hover:hover){.me:hover{transform:scale(1.15)}}
+
+#pSync{display:none;max-width:640px}
+#admin[data-tab=sync] #pSync{display:grid}
+
+/* ===== Footer ===== */
+.menu{position:absolute;right:0;top:130%;z-index:70;display:grid;gap:8px;padding:12px;min-width:230px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.menu .btn{justify-content:center}
+.foot{border-top:1px solid var(--line);background:#090c19}
+.links{display:grid;gap:4px;color:var(--muted)} .links a:hover{color:var(--cyan)}
+
+/* ===== Responsive ===== */
+@media(max-width:860px){
+  .burger{display:block}
+  .nav nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);padding:16px 20px;border-bottom:1px solid var(--line)}
+  .nav nav.open{display:flex}
+  .nav-tools input{display:none}
+  .filters,.adm-cols{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+
+<noscript><p style="padding:14px;text-align:center;background:#ff4d6d;color:#fff">JavaScript is off or blocked in this viewer, so games cannot load. Open this file in Chrome, Edge, Firefox or Safari.</p></noscript>
+<header class="nav">
+  <a class="logo" href="#home">Farman Gaming Zone</a>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <nav id="menu">
+    <a href="#home">Home</a><a href="#games">Games</a><a href="#mods">Mods &amp; Patches</a>
+    <a href="#videos">Videos</a><a href="#guides">Guides</a><a href="#about">About</a>
+  </nav>
+  <div class="nav-tools">
+    <input id="navSearch" type="search" placeholder="Search games…" aria-label="Search">
+    <button class="btn" id="gear" hidden title="Upload games">⬆ Upload games</button>
+    <button class="btn ghost" id="themeBtn" title="Colour themes">🎨</button>
+    <div class="themes" id="themes" hidden><b>Colour theme</b>
+      <button data-th="blue" style="--sw:#00e5ff" title="Blue"></button><button data-th="red" style="--sw:#ff3b4e" title="Red"></button><button data-th="green" style="--sw:#2bff88" title="Green"></button><button data-th="purple" style="--sw:#b46bff" title="Purple"></button>
+      <button data-th="orange" style="--sw:#ffa61a" title="Orange"></button><button data-th="pink" style="--sw:#ff5fb3" title="Pink"></button><button data-th="rainbow" style="--sw:conic-gradient(red,yellow,lime,cyan,blue,magenta,red)" title="Rainbow (changes by itself)"></button>
+    </div>
+    <button class="btn ghost" id="savedBtn">♥ Saved <b id="savedCount">0</b></button>
+    <div class="menu" id="savedMenu" hidden>
+      <button class="btn ghost" id="smSaved">♥ Show saved games</button>
+      <button class="btn ghost" id="smOwner">🔒 Owner: upload games</button>
+    </div>
+  </div>
+</header>
+
+<main id="site">
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <img class="me" src="data:image/jpeg;base64,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" alt="Mohammad Farman"><h1>Cricket Games</h1>
+      <p>Original games, free indie releases, mods and step-by-step guides, plus every video from our YouTube channel.</p>
+      <div class="row">
+        <a class="btn" href="#games">Explore Games</a>
+        <a class="btn ghost" id="ytHero" href="https://www.youtube.com/" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="cats" id="cats">
+      <button data-cat="PC Games"><i>🖥</i><b>PC Games</b><span>Desktop releases</span></button>
+      <button data-cat="Mobile Games"><i>📱</i><b>Mobile Games</b><span>Android &amp; iOS</span></button>
+      <button data-cat="Mods & Patches"><i>🛠</i><b>Mods &amp; Patches</b><span>Fixes and add-ons</span></button>
+      <a class="catlink" href="#guides"><i>📘</i><b>Guides</b><span>Install &amp; fix help</span></a>
+    </div>
+  </section>
+
+  <section class="wrap" id="top"><h2>Top 20 mobile games</h2><div class="grid" id="topGrid"></div></section>
+
+  <section class="wrap" id="games">
+    <h2>Explore the collection</h2>
+    <div class="filters">
+      <input id="search" type="search" placeholder="Search by title or genre" aria-label="Search games">
+      <select id="fCat" aria-label="Category"><option value="">All categories</option><option>PC Games</option><option>Mobile Games</option><option>Mods &amp; Patches</option></select>
+      <select id="fGenre" aria-label="Genre"><option value="">All genres</option></select>
+      <select id="fSort" aria-label="Sort"><option value="new">Newest</option><option value="popular">Most popular</option></select>
+    </div>
+    <p class="muted" id="resultInfo"></p>
+    <div class="grid" id="gameGrid"></div>
+  </section>
+
+  <section class="wrap" id="mods">
+    <h2>Mods &amp; Patches</h2>
+    <div class="grid" id="modGrid"></div>
+  </section>
+
+  <section class="wrap" id="videos">
+    <div class="between"><h2>From our YouTube channel</h2><a class="btn" id="subBtn" href="https://www.youtube.com/" target="_blank" rel="noopener">Subscribe</a></div>
+    <div class="grid vids" id="videoGrid"></div>
+  </section>
+
+  <section class="wrap" id="guides">
+    <h2>Guides</h2>
+    <div class="grid" id="guideGrid"></div>
+  </section>
+
+  <section class="wrap" id="about">
+    <h2>About</h2>
+    <p class="muted narrow">Farman Gaming Zone is a home for original games, free indie releases, mods and patches. Only content we made or have permission to share is published here. Rights holders can reach us through the contact link below.</p>
+  </section>
+</main>
+
+<!-- Admin panel (opens at #admin) -->
+<section class="admin" id="admin" data-tab="upload" hidden>
+  <div class="wrap">
+    <div class="between"><h2>Admin panel</h2><span class="row"><a class="btn ghost" href="#home">Back to site</a><button class="btn ghost" id="lockBtn">Lock &amp; hide settings</button></span></div>
+    <div class="tabs" id="admTabs"><button data-t="upload" class="on">Upload</button><button data-t="link">Add by link</button><button data-t="edit">Edit games</button><button data-t="video">YouTube</button><button data-t="sync">Backup</button></div>
+    <div class="adm-cols">
+      <form id="gameForm" class="card form">
+        <h3 id="gameFormTitle">Add game</h3>
+        <input type="hidden" name="id">
+        <label>Title<input name="title" required></label>
+        <label class="lk">Cover image URL<input name="cover" placeholder="https://… (or choose a file below)"></label>
+        <label class="up">Cover image from your device<input type="file" id="coverFile" accept="image/*"></label>
+        <label class="up">Game file from your device (APK, ZIP, EXE…) <small>saved in this browser only</small><input type="file" id="gameFile"></label>
+        <label>Description<textarea name="description" rows="3"></textarea></label>
+        <div class="two">
+          <label>Category<select name="category"><option>PC Games</option><option>Mobile Games</option><option>Mods &amp; Patches</option></select></label>
+          <label>Genre<input name="genre" placeholder="Action, Racing…" required></label>
+          <label>Version<input name="version" placeholder="1.0"></label>
+          <label>Size<input name="size" placeholder="1.2 GB"></label>
+        </div>
+        <label class="lk">Download / APK / file link (Drive, Mediafire, Play Store…)<input name="link" type="url" placeholder="https://…"></label>
+        <div class="row"><button class="btn" type="submit">Save</button><button class="btn ghost" type="button" id="gameCancel">Clear</button></div>
+      </form>
+      <form id="videoForm" class="card form">
+        <h3>Add YouTube video</h3>
+        <label>YouTube URL<input name="url" placeholder="https://www.youtube.com/watch?v=…" required></label>
+        <label>Title<input name="title" required></label>
+        <button class="btn" type="submit">Add video</button>
+        <h3>Channel link</h3>
+        <label>Your channel URL<input id="channelUrl" placeholder="https://www.youtube.com/@yourchannel"></label>
+        <button class="btn ghost" type="button" id="saveChannel">Save channel</button>
+      </form>
+    </div>
+    <div id="pSync" class="card form"><h3>Backup &amp; move your games</h3>
+      <p class="muted">Games you add are saved only in this browser. Press Export, then paste the text into Import on another browser. To show games to every visitor, send the exported text to Claude.</p>
+      <textarea id="syncBox" rows="7" placeholder="Exported text appears here. To import, paste it here."></textarea>
+      <div class="row"><button class="btn" id="syncExport">Export</button><button class="btn ghost" id="syncImport">Import</button></div></div>
+    <div id="pGames"><h3>Edit or delete games</h3><div id="adminGames" class="list"></div></div>
+    <div id="pVids"><h3>Videos</h3><div id="adminVideos" class="list"></div></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap between">
+    <div><b class="logo">Farman Gaming Zone</b><p class="muted">Games, mods and videos.</p></div>
+    <div class="links"><a href="#" id="fYt" target="_blank" rel="noopener">YouTube</a><a href="#" target="_blank" rel="noopener">Instagram</a><a href="#" target="_blank" rel="noopener">Facebook</a></div>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">DMCA / Contact</a></div>
+  </div>
+  <p class="muted center"><span id="secret" style="cursor:default">©</span> <span id="yr"></span> Farman Gaming Zone. All rights reserved.</p>
+</footer>
+
+<div class="modal" id="modal" hidden><div class="box"><button class="x" id="mClose" aria-label="Close">✕</button><div id="mBody"></div></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script>
+/* PixelVault – vanilla JS
+   DATA STORAGE: everything is saved in the browser's localStorage as JSON, so the site works with no backend.
+   Note: localStorage is per-browser. To share content with all visitors, move the load/save functions
+   (loadDB / saveDB) to Firebase Firestore or Supabase (replace them with fetch/SDK calls to a "games" and "videos" table). */
+
+const ADMIN_HASH = "7792072de83b866bb116174a5b5e592d7d3c60d252e6d6d0d3fc87e47380214e";   // SHA-256 of the owner password: the password itself is not written in this file
+function sha256js(str) {   // fallback for browsers/pages without crypto.subtle (e.g. plain http hosting)
+  const K = [], H0 = [];
+  for (let p = 2, c = 0; c < 64; p++) { let ok = 1; for (let i = 2; i * i <= p; i++) if (p % i === 0) { ok = 0; break; } if (ok) { if (c < 8) H0[c] = Math.pow(p, .5) % 1 * 4294967296 | 0; K[c++] = Math.pow(p, 1 / 3) % 1 * 4294967296 | 0; } }
+  const b = [...new TextEncoder().encode(str)], l = b.length * 8; b.push(128); while (b.length % 64 !== 56) b.push(0);
+  for (let i = 7; i >= 0; i--) b.push(i > 3 ? 0 : (l >>> (i * 8)) & 255);
+  const w = []; for (let i = 0; i < b.length; i += 4) w.push(b[i] << 24 | b[i + 1] << 16 | b[i + 2] << 8 | b[i + 3]);
+  const rr = (x, n) => x >>> n | x << 32 - n; let h = H0.slice();
+  for (let o = 0; o < w.length; o += 16) {
+    const a = w.slice(o, o + 16);
+    for (let i = 16; i < 64; i++) { const s0 = rr(a[i - 15], 7) ^ rr(a[i - 15], 18) ^ a[i - 15] >>> 3, s1 = rr(a[i - 2], 17) ^ rr(a[i - 2], 19) ^ a[i - 2] >>> 10; a[i] = a[i - 16] + s0 + a[i - 7] + s1 | 0; }
+    let [A, B, C, D, E, F, G, J] = h;
+    for (let i = 0; i < 64; i++) { const t1 = J + (rr(E, 6) ^ rr(E, 11) ^ rr(E, 25)) + (E & F ^ ~E & G) + K[i] + a[i] | 0, t2 = (rr(A, 2) ^ rr(A, 13) ^ rr(A, 22)) + (A & B ^ A & C ^ B & C) | 0; J = G; G = F; F = E; E = D + t1 | 0; D = C; C = B; B = A; A = t1 + t2 | 0; }
+    h = [h[0] + A | 0, h[1] + B | 0, h[2] + C | 0, h[3] + D | 0, h[4] + E | 0, h[5] + F | 0, h[6] + G | 0, h[7] + J | 0];
+  }
+  return h.map(x => (x >>> 0).toString(16).padStart(8, "0")).join("");
+}
+const sha = async s => {
+  s = s.toLowerCase().replace(/\s+/g, "");
+  if (window.crypto && crypto.subtle) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
+  return sha256js(s);
+};
+const KEY = "pv_db_v3", SAVED_KEY = "pv_saved_v1";
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ---------- Sample data (replace via the admin panel) ---------- */
+const SEED = {
+  channel: "https://www.youtube.com/",
+  games: [
+    { id: 1, title: "Neon Drift", category: "PC Games", genre: "Racing", version: "1.2", size: "320 MB", description: "Sample entry. Replace with your own game.", cover: "", link: "#", views: 120, created: 3 },
+    { id: 2, title: "Pocket Kingdom", category: "Mobile Games", genre: "Strategy", version: "0.9", size: "85 MB", description: "Sample entry. Replace with your own game.", cover: "", link: "#", views: 80, created: 2 },
+    { id: 3, title: "Neon Drift HD Texture Pack", category: "Mods & Patches", genre: "Racing", version: "1.0", size: "150 MB", description: "Sample mod. Replace with your own.", cover: "", link: "#", views: 45, created: 1 }
+  ],
+  videos: []
+};
+/* Top 50 popular Google Play games. Covers are generated artwork; link = official Google Play search. Replace covers from the admin panel. */
+function makeTop50() {
+  const L = [
+    ["PUBG Mobile","Shooting","🔫",25],["Call of Duty Mobile","Shooting","🎯",210],["Free Fire MAX","Shooting","🔥",15],["Critical Ops","Shooting","🪖",200],["Standoff 2","Shooting","💥",350],["Modern Combat 5","Shooting","🚁",190],["Sniper 3D","Shooting","🔭",120],["Mini Militia","Shooting","🪂",95],["Bullet Force","Shooting","🧨",30],["Pixel Gun 3D","Shooting","🟩",140],
+    ["Minecraft","Survival","⛏️",110],["Roblox","Survival","🧱",0],["Last Day on Earth","Survival","🧟",80],["ARK Survival Evolved","Survival","🦖",150],["Last Island of Survival","Survival","🏝️",170],["Rules of Survival","Survival","🪓",45],["Whiteout Survival","Survival","❄️",195],
+    ["Real Cricket 24","Cricket","🏏",130],["World Cricket Championship 3","Cricket","🏆",50],["Cricket League","Cricket","🏟️",220],["Epic Cricket","Cricket","🌟",270],["Hitwicket Superstars","Cricket","⚡",60],
+    ["eFootball","Football","⚽",140],["EA SPORTS FC Mobile","Football","🥅",160],["Dream League Soccer","Football","👟",230],["Score Hero 2","Football","🎽",100],["Top Eleven","Football","📋",20],
+    ["Badminton League","Badminton","🏸",180],["Badminton Clash","Badminton","🥇",300],["Badminton Blitz","Badminton","💨",330],
+    ["Asphalt 9 Legends","Racing","🏎️",10],["Real Racing 3","Racing","🏁",215],["CarX Street","Racing","🌃",280],["Hill Climb Racing 2","Racing","🚙",35],["Need for Speed No Limits","Racing","🚓",5],
+    ["Genshin Impact","Action","🗡️",185],["Brawl Stars","Action","⭐",55],["Shadow Fight 4","Action","🥷",260],["Subway Surfers","Action","🛹",165],["Temple Run 2","Action","🏃",40],
+    ["Clash of Clans","Strategy","🏰",25],["Clash Royale","Strategy","👑",225],["Mobile Legends","Strategy","🛡️",240],
+    ["Ludo King","Casual","🎲",50],["Carrom Pool","Casual","🪙",35],["8 Ball Pool","Casual","🎱",120],["Candy Crush Saga","Casual","🍬",320],["Among Us","Casual","👾",350],["Stumble Guys","Casual","🏃",290],["Plants vs Zombies 2","Puzzle","🌻",100]
+  ];
+  return L.map(([t, g, e, h], i) => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(${h},80%,45%)"/><stop offset="1" stop-color="hsl(${(h + 50) % 360},70%,16%)"/></linearGradient></defs><rect width="320" height="200" fill="url(#a)"/><circle cx="275" cy="25" r="95" fill="rgba(255,255,255,.08)"/><text x="160" y="108" font-size="70" text-anchor="middle">${e}</text><text x="160" y="168" font-size="19" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">${t}</text></svg>`;
+    return { id: i + 1, title: t, category: "Mobile Games", genre: g, version: "Latest", size: "Google Play",
+      description: `${t} is one of the most popular ${g.toLowerCase()} games on Google Play. The button opens its official store listing.`,
+      cover: "data:image/svg+xml;utf8," + encodeURIComponent(svg), link: "https://play.google.com/store/search?c=apps&q=" + encodeURIComponent(t), views: 1000 - i * 12, created: 100 - i };
+  });
+}
+SEED.games = makeTop50();
+SEED.games.forEach(g => g.cover = "");   // no generated pictures; upload real covers from the admin panel
+
+/* 10 popular PC games. Links open the official Steam store page. */
+function makePC() {
+  const P = [["Grand Theft Auto V","Action"],["Counter-Strike 2","Shooting"],["Cyberpunk 2077","RPG"],["The Witcher 3","RPG"],["Red Dead Redemption 2","Action"],["Elden Ring","RPG"],["Forza Horizon 5","Racing"],["EA SPORTS FC 25","Football"],["Cricket 24","Cricket"],["Marvel's Spider-Man Remastered","Action"]];
+  return P.map(([t, g], i) => ({ id: 101 + i, title: t, category: "PC Games", genre: g, version: "Latest", size: "Steam",
+    description: `${t} for PC. The button opens the official Steam store page.`, cover: "",
+    link: "https://store.steampowered.com/search/?term=" + encodeURIComponent(t), views: 300 - i * 10, created: 200 - i }));
+}
+
+const GUIDES = [
+  { t: "How to install a game", s: ["Download the file from the game page.", "Extract the archive with 7-Zip.", "Run setup.exe and follow the steps.", "Launch from the desktop shortcut."] },
+  { t: "How to fix missing DLL errors", s: ["Install the latest Visual C++ Redistributable.", "Install DirectX End-User Runtime.", "Restart your PC and run the game again."] },
+  { t: "How to apply a patch or mod", s: ["Back up your save files.", "Copy the patch files into the game folder.", "Choose Replace when asked.", "Start the game and check the version."] }
+];
+
+/* ---------- Storage ---------- */
+const loadDB = () => { try { return JSON.parse(localStorage.getItem(KEY)) || structuredClone(SEED); } catch { return structuredClone(SEED); } };
+const saveDB = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch { toast("Storage full. Use a smaller cover image."); } };
+let db = loadDB();
+if (!db.games.some(g => g.category === "PC Games")) { db.games.push(...makePC()); saveDB(); }
+let saved = (()=>{try{return JSON.parse(localStorage.getItem(SAVED_KEY)||"[]")}catch{return []}})();
+let showSavedOnly = false;
+
+/* ---------- Game files (IndexedDB: holds large files in this browser; swap for Firebase Storage / Supabase Storage to share with visitors) ---------- */
+const idb = () => new Promise((res, rej) => { const r = indexedDB.open("pv_files", 1); r.onupgradeneeded = () => r.result.createObjectStore("f"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+const putFile = async (id, file) => { const d = await idb(); return new Promise((res, rej) => { const tx = d.transaction("f", "readwrite"); tx.objectStore("f").put(file, id); tx.oncomplete = res; tx.onerror = () => rej(tx.error); }); };
+const getFile = async id => { const d = await idb(); return new Promise((res, rej) => { const q = d.transaction("f").objectStore("f").get(id); q.onsuccess = () => res(q.result); q.onerror = () => rej(q.error); }); };
+const delFile = async id => { const d = await idb(); d.transaction("f", "readwrite").objectStore("f").delete(id); };
+
+/* ---------- Toast ---------- */
+function toast(msg) {
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  $("#toasts").append(t); setTimeout(() => t.remove(), 3000);
+}
+
+/* ---------- Game cards ---------- */
+function card(g) {
+  const on = saved.includes(g.id);
+  const img = g.cover ? `<img src="${esc(g.cover)}" alt="${esc(g.title)}" loading="lazy">` : `<div class="ph">${esc(g.title[0])}</div>`;
+  return `<article class="card game">
+    <div class="cover">${img}<span class="tag">${esc(g.genre)}</span>
+      <button class="fav ${on ? "on" : ""}" data-fav="${g.id}" aria-label="Save">${on ? "♥" : "♡"}</button></div>
+    <div class="body"><h3>${esc(g.title)}</h3>
+      <div class="meta"><span>v${esc(g.version || "1.0")}</span><span>${esc(g.size || "–")}</span></div>
+      <div class="row"><button class="btn ghost sm" data-details="${g.id}">Details</button><button class="btn sm" data-dl="${g.id}">Download</button></div></div></article>`;
+}
+const skeletons = n => Array.from({ length: n }, () => `<div class="skel"></div>`).join("");
+
+/* ---------- Filtering ---------- */
+function filtered() {
+  const q = ($("#search").value || "").toLowerCase().trim();
+  const cat = $("#fCat").value, genre = $("#fGenre").value, sort = $("#fSort").value;
+  let list = db.games.filter(g => g.category !== "Mods & Patches" || cat === "Mods & Patches");
+  list = list.filter(g => (!cat || g.category === cat) && (!genre || g.genre === genre) &&
+    (!q || (g.title + " " + g.genre).toLowerCase().includes(q)) && (!showSavedOnly || saved.includes(g.id)));
+  return list.sort((a, b) => sort === "popular" ? b.views - a.views : b.created - a.created);
+}
+function renderGames() {
+  const list = filtered();
+  $("#gameGrid").innerHTML = list.length ? list.map(card).join("") : `<div class="empty">No games match. Try another search or filter.</div>`;
+  $("#resultInfo").textContent = `${list.length} result${list.length === 1 ? "" : "s"}${showSavedOnly ? " (saved only)" : ""}`;
+}
+function renderTop() {
+  $("#topGrid").innerHTML = [...db.games].filter(g => g.category === "Mobile Games").sort((a, b) => b.views - a.views).slice(0, 20).map(card).join("");
+}
+function renderMods() {
+  const mods = db.games.filter(g => g.category === "Mods & Patches");
+  $("#modGrid").innerHTML = mods.length ? mods.map(card).join("") : `<div class="empty">No mods or patches yet.</div>`;
+}
+function renderGenres() {
+  const cur = $("#fGenre").value, gs = [...new Set(db.games.map(g => g.genre))].sort();
+  $("#fGenre").innerHTML = `<option value="">All genres</option>` + gs.map(g => `<option ${g === cur ? "selected" : ""}>${esc(g)}</option>`).join("");
+}
+
+/* ---------- Videos ---------- */
+function ytId(url) {
+  const m = String(url).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : null;
+}
+function renderVideos() {
+  $("#videoGrid").innerHTML = db.videos.length ? db.videos.map(v =>
+    `<article class="card video"><iframe src="https://www.youtube-nocookie.com/embed/${v.vid}" loading="lazy" title="${esc(v.title)}" allowfullscreen></iframe><h3>${esc(v.title)}</h3></article>`).join("")
+    : `<div class="empty">No videos yet. Add your first YouTube video from the admin panel (#admin).</div>`;
+  ["#subBtn", "#ytHero", "#fYt"].forEach(s => $(s).href = db.channel);
+}
+function renderGuides() {
+  $("#guideGrid").innerHTML = GUIDES.map(g => `<article class="card guide"><h3>${esc(g.t)}</h3><ol>${g.s.map(s => `<li>${esc(s)}</li>`).join("")}</ol></article>`).join("");
+}
+function renderAll() { renderGenres(); renderGames(); renderTop(); renderMods(); renderVideos(); $("#savedCount").textContent = saved.length; }
+
+/* ---------- Modal ---------- */
+let timer;
+const modal = html => { $("#mBody").innerHTML = html; $("#modal").hidden = false; };
+const closeModal = () => { $("#modal").hidden = true; clearInterval(timer); };
+function openDetails(g) {
+  g.views++; saveDB();
+  modal(`<h3 style="margin-top:0">${esc(g.title)}</h3><p class="muted">${esc(g.category)} · ${esc(g.genre)} · v${esc(g.version)} · ${esc(g.size)}</p>
+    <p style="margin:14px 0">${esc(g.description || "No description yet.")}</p><button class="btn" data-dl="${g.id}">Download</button>`);
+}
+function openDownload(g) {
+  let n = 10;
+  modal(`<h3 style="margin-top:0">Preparing ${esc(g.title)}</h3><div class="count" id="cd">${n}</div><div class="row" style="justify-content:center"><a class="btn" id="dlGo" hidden target="_blank" rel="noopener">Open download</a></div>`);
+  timer = setInterval(() => {
+    n--; $("#cd").textContent = n;
+    if (n <= 0) { clearInterval(timer); $("#cd").textContent = "Ready"; const a = $("#dlGo"); a.hidden = false;
+      if (g.fileId) getFile(g.fileId).then(f => { if (f) { a.href = URL.createObjectURL(f); a.download = g.fileName || g.title; a.removeAttribute("target"); } else { a.href = g.link || "#"; toast("File not found in this browser"); } }).catch(() => { a.href = g.link || "#"; });
+      else a.href = g.link || "#"; }
+  }, 1000);
+}
+
+/* ---------- Global click handling ---------- */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-fav],[data-details],[data-dl],[data-cat]"); if (!t) return;
+  const find = id => db.games.find(g => g.id == id);
+  if (t.dataset.fav) {
+    const id = +t.dataset.fav; saved = saved.includes(id) ? saved.filter(x => x !== id) : [...saved, id];
+    try{localStorage.setItem(SAVED_KEY, JSON.stringify(saved));}catch{} renderAll(); toast(saved.includes(id) ? "Saved" : "Removed from saved");
+  } else if (t.dataset.details) openDetails(find(t.dataset.details));
+  else if (t.dataset.dl) openDownload(find(t.dataset.dl));
+  else if (t.dataset.cat) { $("#fCat").value = t.dataset.cat; renderGames(); $("#games").scrollIntoView(); }
+});
+$("#mClose").onclick = closeModal;
+$("#modal").addEventListener("click", e => { if (e.target.id === "modal") closeModal(); });
+$("#burger").onclick = () => $("#menu").classList.toggle("open");
+$("#menu").onclick = () => $("#menu").classList.remove("open");
+$("#savedBtn").onclick = e => { e.stopPropagation(); $("#themes").hidden = true; $("#savedMenu").hidden = !$("#savedMenu").hidden; };
+$("#smSaved").onclick = () => { showSavedOnly = !showSavedOnly; renderGames(); $("#games").scrollIntoView(); $("#smSaved").textContent = showSavedOnly ? "Show all games" : "♥ Show saved games"; toast(showSavedOnly ? "Showing saved games" : "Showing all games"); };
+$("#smOwner").onclick = () => { $("#admTabs button[data-t=upload]").click(); openAdmin(); };
+["search", "fCat", "fGenre", "fSort"].forEach(id => $("#" + id).addEventListener("input", renderGames));
+$("#navSearch").addEventListener("input", e => { $("#search").value = e.target.value; renderGames(); });
+
+/* ---------- Admin ---------- */
+let authed = false; try{authed = sessionStorage.getItem("pv_admin") === "1";}catch{}
+function askPassword() {
+  modal(`<h3 style="margin-top:0">Admin login</h3><form id="pw" class="form"><input type="password" id="pwIn" placeholder="Password" autocomplete="off"><button class="btn">Login</button></form>`);
+  $("#pwIn").focus();
+  $("#pw").onsubmit = async e => { e.preventDefault();
+    if (await sha($("#pwIn").value) === ADMIN_HASH) { authed = true; try{sessionStorage.setItem("pv_admin","1");localStorage.setItem("pv_owner","1")}catch{} showGear(); closeModal(); route(); }
+    else toast("Wrong password"); };
+}
+function route() {
+  if (location.hash === "#admin") {
+    if (!authed) { $("#admin").hidden = true; $("#site").hidden = false; askPassword(); return; }
+    $("#admin").hidden = false; $("#site").hidden = true; renderAdmin(); window.scrollTo(0,0);
+  } else { $("#admin").hidden = true; $("#site").hidden = false; }
+}
+function askTwice(b) {   // two-click delete (confirm() is blocked in hosted pages)
+  if (b.dataset.armed) return true;
+  b.dataset.armed = "1"; b.textContent = "Sure?";
+  setTimeout(() => { delete b.dataset.armed; b.textContent = "Delete"; }, 3000); return false;
+}
+function renderAdmin() {
+  $("#adminGames").innerHTML = db.games.map(g => `<div class="item"><span>${esc(g.title)} <small class="muted">· ${esc(g.category)}</small></span>
+    <span class="row"><button class="btn ghost sm" data-edit="${g.id}">Edit</button><button class="btn danger sm" data-del="${g.id}">Delete</button></span></div>`).join("") || `<p class="muted">No games yet.</p>`;
+  $("#adminVideos").innerHTML = db.videos.map(v => `<div class="item"><span>${esc(v.title)}</span><button class="btn danger sm" data-vdel="${v.vid}">Delete</button></div>`).join("") || `<p class="muted">No videos yet.</p>`;
+  $("#channelUrl").value = db.channel;
+}
+$("#admin").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.del && askTwice(b)) { const dg = db.games.find(g => g.id == b.dataset.del); if (dg && dg.fileId) delFile(dg.fileId).catch(() => {}); db.games = db.games.filter(g => g.id != b.dataset.del); saveDB(); renderAdmin(); renderAll(); toast("Deleted"); }
+  if (b.dataset.vdel && askTwice(b)) { db.videos = db.videos.filter(v => v.vid !== b.dataset.vdel); saveDB(); renderAdmin(); renderAll(); toast("Deleted"); }
+  if (b.dataset.edit) {
+    const g = db.games.find(x => x.id == b.dataset.edit), f = $("#gameForm");
+    ["id", "title", "cover", "description", "category", "genre", "version", "size", "link"].forEach(k => f.elements[k].value = g[k] ?? "");
+    $("#gameFormTitle").textContent = "Edit game"; $("#admin").classList.add("editing"); f.scrollIntoView();
+  }
+});
+const resetGameForm = () => { $("#admin").classList.remove("editing"); $("#gameForm").reset(); $("#gameForm").elements.id.value = ""; $("#gameFormTitle").textContent = "Add game"; };
+$("#gameCancel").onclick = resetGameForm;
+/* Backup: export / import games, videos and channel as text (uploaded files stay in the browser that stored them) */
+$("#syncExport").onclick = () => {
+  const out = JSON.stringify({ channel: db.channel, videos: db.videos, games: db.games.map(({ fileId, fileName, ...g }) => g) });
+  $("#syncBox").value = out;
+  try { navigator.clipboard.writeText(out).then(() => toast("Copied to clipboard")).catch(() => toast("Select all and copy the text")); } catch { toast("Select all and copy the text"); }
+};
+$("#syncImport").onclick = () => {
+  try {
+    const d = JSON.parse($("#syncBox").value); let n = 0;
+    (d.games || []).forEach(g => { if (!db.games.some(x => x.title === g.title && x.category === g.category)) { db.games.push({ ...g, id: Date.now() + n }); n++; } });
+    (d.videos || []).forEach(v => { if (!db.videos.some(x => x.vid === v.vid)) db.videos.push(v); });
+    if (d.channel) db.channel = d.channel;
+    saveDB(); renderAdmin(); renderAll(); toast(n + " games imported");
+  } catch { toast("That is not valid backup text"); }
+};
+$("#admTabs").onclick = e => {                          // switch admin tab: Upload / Add by link / Edit / YouTube
+  const b = e.target.closest("button"); if (!b) return;
+  resetGameForm(); $("#admin").dataset.tab = b.dataset.t;
+  document.querySelectorAll("#admTabs button").forEach(x => x.classList.toggle("on", x === b));
+};
+$("#coverFile").onchange = e => {                       // upload cover -> data URL (max 400 KB to protect localStorage)
+  const f = e.target.files[0]; if (!f) return;
+  if (f.size > 400 * 1024) { toast("Image too large (max 400 KB). Use a URL instead."); e.target.value = ""; return; }
+  const r = new FileReader(); r.onload = () => { $("#gameForm").elements.cover.value = r.result; toast("Cover loaded"); }; r.readAsDataURL(f);
+};
+$("#gameForm").onsubmit = async e => {
+  e.preventDefault(); const d = Object.fromEntries(new FormData(e.target));
+  const file = $("#gameFile").files[0];
+  if (file) {
+    try { const fid = "f" + Date.now(); await putFile(fid, file); d.fileId = fid; d.fileName = file.name; d.size = d.size || (file.size / 1048576).toFixed(1) + " MB"; }
+    catch { toast("Could not store the file in this browser."); return; }
+  }
+  if (d.id) { Object.assign(db.games.find(g => g.id == d.id), d, { id: +d.id }); toast("Updated"); }
+  else { db.games.push({ ...d, id: Date.now(), views: 0, created: Date.now() }); toast("Saved"); }
+  saveDB(); resetGameForm(); renderAdmin(); renderAll();
+};
+$("#videoForm").onsubmit = e => {
+  e.preventDefault(); const d = Object.fromEntries(new FormData(e.target)), vid = ytId(d.url);
+  if (!vid) return toast("Not a valid YouTube link");
+  db.videos.unshift({ vid, title: d.title }); saveDB(); e.target.reset(); renderAdmin(); renderAll(); toast("Video added");
+};
+$("#saveChannel").onclick = () => { db.channel = $("#channelUrl").value || db.channel; saveDB(); renderAll(); toast("Channel saved"); };
+
+/* ---------- Init ---------- */
+$("#yr").textContent = new Date().getFullYear();
+renderGuides();
+$("#gameGrid").innerHTML = skeletons(6);                // skeleton loader, then real content
+setTimeout(renderAll, 500);
+/* Hidden admin entry: click the © in the footer, or press Ctrl+Shift+A. Visitors see nothing. */
+const openAdmin = () => { if (location.hash === "#admin") route(); else location.hash = "#admin"; };
+$("#secret").onclick = openAdmin;
+/* Owner-only Settings button: appears in the navbar only on a browser where the owner has logged in. Visitors never see it. */
+function showGear() { let on = false; try { on = localStorage.getItem("pv_owner") === "1"; } catch {} $("#gear").hidden = !on; }
+$("#gear").onclick = () => { $("#admTabs button[data-t=upload]").click(); openAdmin(); };
+$("#lockBtn").onclick = () => { try { localStorage.removeItem("pv_owner"); sessionStorage.removeItem("pv_admin"); } catch {} authed = false; showGear(); location.hash = "#home"; toast("Settings locked and hidden"); };
+showGear();
+document.addEventListener("keydown", e => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") { e.preventDefault(); openAdmin(); } });
+window.addEventListener("hashchange", route); route();
+
+/* Colour themes (🎨 button in the navbar). Rainbow = colours change on their own. */
+const THEMES = {
+  blue:   { c: "#00e5ff", c2: "#5bf0ff", p: "#8b5cf6", h: 190, h2: 262, a: "#1a1050", b: "#06303d" },
+  red:    { c: "#ff3b4e", c2: "#ff8a5b", p: "#ff8a00", h: 355, h2: 25,  a: "#4a0f1a", b: "#3d1306" },
+  green:  { c: "#2bff88", c2: "#8dffb8", p: "#00b36b", h: 145, h2: 165, a: "#0a3a22", b: "#063d2e" },
+  purple: { c: "#b46bff", c2: "#e0a8ff", p: "#ff4df0", h: 275, h2: 310, a: "#2a0f55", b: "#3d0640" },
+  orange: { c: "#ffa61a", c2: "#ffd166", p: "#ff4d2d", h: 35,  h2: 10,  a: "#4a2a06", b: "#3d1306" },
+  pink:   { c: "#ff5fb3", c2: "#ff9ad5", p: "#8b5cf6", h: 330, h2: 262, a: "#4a0f3a", b: "#1a1050" }
+};
+let themeHue = null, rainbowTimer;
+function setVars(t) { const s = document.documentElement.style; s.setProperty("--cyan", t.c); s.setProperty("--cyan2", t.c2); s.setProperty("--purple", t.p); s.setProperty("--th", t.h); s.setProperty("--th2", t.h2); s.setProperty("--h1", t.a); s.setProperty("--h2", t.b); s.setProperty("--lh", t.h); }
+function applyTheme(name) {
+  clearInterval(rainbowTimer);
+  if (name === "rainbow") {
+    let h = 0; themeHue = null;
+    const tick = () => { h = (h + 3) % 360; setVars({ c: `hsl(${h},100%,60%)`, c2: `hsl(${(h + 40) % 360},100%,70%)`, p: `hsl(${(h + 80) % 360},85%,62%)`, h, h2: (h + 80) % 360, a: `hsl(${h},60%,16%)`, b: `hsl(${(h + 60) % 360},60%,14%)` }); };
+    tick(); rainbowTimer = setInterval(tick, 150);
+  } else { const t = THEMES[name] || THEMES.blue; themeHue = t.h; setVars(t); }
+  document.querySelectorAll("#themes button").forEach(b => b.classList.toggle("on", b.dataset.th === name));
+  try { localStorage.setItem("pv_theme", name); } catch {}
+}
+$("#themeBtn").onclick = e => { e.stopPropagation(); $("#savedMenu").hidden = true; $("#themes").hidden = !$("#themes").hidden; };
+$("#themes").onclick = e => { const b = e.target.closest("button[data-th]"); if (b) { applyTheme(b.dataset.th); toast("Theme changed"); } e.stopPropagation(); };
+document.addEventListener("click", () => { $("#themes").hidden = true; $("#savedMenu").hidden = true; });
+let savedTheme = "blue"; try { savedTheme = localStorage.getItem("pv_theme") || "blue"; } catch {}
+applyTheme(savedTheme);
+
+/* Moving light: a glow follows the mouse and its colour changes with position; hovered items zoom and light up in their own colour */
+if (matchMedia("(hover:hover)").matches) {
+  const glow = document.createElement("div"); glow.id = "glow"; document.body.append(glow);
+  document.addEventListener("mousemove", e => {
+    glow.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+    glow.style.setProperty("--gh", themeHue ?? Math.round(e.clientX / innerWidth * 300 + e.clientY / innerHeight * 60));
+    const t = e.target.closest && e.target.closest(".card,.cats button,.catlink,.btn,.tabs button");
+    if (t) { const r = t.getBoundingClientRect(); t.style.setProperty("--lh", themeHue ?? Math.round((e.clientX - r.left) / r.width * 300 + 20)); }
+  });
+}
+
+</script>
+</body>
+</html>
